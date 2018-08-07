@@ -5,6 +5,13 @@
   "repository": "https://github.com/bepeco/fe.git",
   "author": "ben.song <ben.song@kakaocorp.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --open --mode development",
+    "watch": "webpack --watch",
+    "build": "standard && webpack",
+    "lint": "standard",
+    "precommit": "lint-staged"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
@@ -23,24 +30,8 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
   },
-  "babel": {
-    "presets": [
-      "env",
-      "stage-2"
-    ],
-    "plugins": [
-      "transform-decorators-legacy"
-    ]
-  },
   "standard": {
     "parser": "babel-eslint"
-  },
-  "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "watch": "webpack --watch",
-    "build": "standard && webpack",
-    "lint": "standard",
-    "precommit": "lint-staged"
   },
   "lint-staged": {
     "src/**/*.js": [

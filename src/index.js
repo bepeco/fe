@@ -1,17 +1,16 @@
-import { print, DecoTemp } from './module1'
+import { Freeze } from './ConstDecos'
 
-@DecoTemp
-class DecoTarget {
+@Freeze
+class Constants {
+  name = 'mysticPrg';
+  age = 33
 }
 
 window.addEventListener('load', () => {
-  document.body.innerHTML = 'Hello, FE'
+  const data = new Constants()
 
-  print()
-  console.log(print)
-
-  const decorated = new DecoTarget()
-  decorated.printName()
+  const str = `Hello ${data.name}! Your age: ${data.age}`
+  document.body.innerHTML = str
 })
 
 /*

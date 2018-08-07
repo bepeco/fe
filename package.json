@@ -11,10 +11,10 @@
     "build": "standard && webpack",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "precommit": "lint-staged",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

@@ -37,7 +37,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "watch": "webpack --watch",
-    "build": "webpack",
+    "build": "standard && webpack",
     "lint": "standard",
     "precommit": "lint-staged"
   },

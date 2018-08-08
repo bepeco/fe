@@ -2,7 +2,7 @@ import { Freeze } from './ConstDecos'
 
 @Freeze
 class Constants {
-  name = 'mysticPrg';
+  name = 'mysticPrg'
   age = 33
 }
 

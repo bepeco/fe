@@ -1,15 +1,49 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const Webpack = require('webpack')
+
+const distPath = 'dist'
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index.js'],
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    chunkFilename: '[name].bundle.js',
+    path: path.resolve(__dirname, distPath)
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: path.resolve(__dirname, distPath),
+    port: 9000,
+    hot: true
   },
   plugins: [
-      new HtmlWebpackPlugin({
-          template: "public/index.html"
-      })
-  ]
-};
+    new CleanWebpackPlugin([distPath]),
+    new HtmlWebpackPlugin({
+      template: 'public/index.html'
+    }),
+    new Webpack.HotModuleReplacementPlugin()
+  ],
+  module: {
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'standard-loader',
+        exclude: /node_modules/,
+        options: {
+          parser: 'babel-eslint'
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['*', '.js']
+  }
+}

@@ -21,6 +21,14 @@ https://standardjs.com/readme-kokr.html
 https://github.com/okonet/lint-staged
 https://jaeyeophan.github.io/2017/05/16/Everything-about-babel/ - babel polyfill 추가해야함
 
+CI - https://travis-ci.org/
+Coverage report - https://coveralls.io/
+Code quality - https://codeclimate.com/
+Documentation - https://inch-ci.org/
+JSDoc? - intellij auto comment: https://www.jetbrains.com/help/idea/creating-jsdoc-comments.html
+ESDoc? - difference with esdoc and jsdoc: https://esdoc.org/manual/faq.html#difference-between-esdoc-and-jsdoc
+index.d.ts? generate: https://www.npmjs.com/package/dts-gen
+
 Domain을 염두에 둔다면?
 jQuery와 인터페이스를 비슷하게 해도 괜찮을듯(익숙하니까)
 

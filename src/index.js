@@ -64,6 +64,63 @@ div(
   p("Hi").spec(todoField)
 ).id("name").on("click", addTodo)
 
+ex 3)
+div(
+  id("name"),
+  on("click", addTodo),
+  p(
+    input(value(Temp))
+  ),
+  p(
+    spec(todField),
+    "Hi"
+  )
+)
+
+ex 4)
+div()
+  .attr(
+    id("name"),
+    on("click", addTodo),
+  ).children(
+    p().children(
+      input.attr(value(temp))
+    ),
+    p()
+      .spec(todField)
+      .children("Hi")
+  );
+
+ex 5)
+div(
+  id("name"),
+  on("click", addTodo),
+).children(
+  p().children(
+    input(value(temp))
+  ),
+  p(spec(todField)).children("Hi")
+);
+
+ex 6)
+const deleteSpec = spec({
+  onClick: deleteTodo,
+  class: "delete-btn"
+});
+
+div({
+  id: "name",
+  onClick: addTodo,
+  inner: [
+    p({ inner: input({ value: temp })),
+    p({ inner: "Hi" ),
+    input({
+      type: "button",
+      spec: deleteSpec
+    })
+  ]
+})
+
 예제는 역시 TodoList가 좋을듯
 const data = [
   { id: 0, done: false, contents: "asdasdad" },

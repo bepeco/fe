@@ -8,11 +8,12 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "watch": "webpack --watch",
-    "build": "standard && webpack",
+    "build": "standard && webpack && test:coveralls",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "test:watch": "jest --watch",
     "precommit": "lint-staged",
     "esdoc": "esdoc"
@@ -27,6 +28,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
+    "coveralls": "^3.0.2",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",

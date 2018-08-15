@@ -8,12 +8,12 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "watch": "webpack --watch",
-    "build": "standard && webpack && npm run test:coveralls",
+    "build": "standard && webpack",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test:reporter": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "test:watch": "jest --watch",
     "precommit": "lint-staged",
     "esdoc": "esdoc"

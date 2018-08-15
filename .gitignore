@@ -161,3 +161,4 @@ typings/
 dist/
 .idea/**/*
 .idea/*
+/docs/

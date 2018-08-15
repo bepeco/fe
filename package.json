@@ -13,7 +13,8 @@
     "lint:fix": "standard --fix",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:reporter": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test:codeclimate": "jest --coverage --coverageReporters=lcov",
     "test:watch": "jest --watch",
     "precommit": "lint-staged",
     "esdoc": "esdoc"

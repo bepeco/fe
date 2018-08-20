@@ -1,8 +1,10 @@
-import createTodoItem from "TodoItem";
+import createTodoItem from './TodoItem'
 
-export const createTodoList = list => `
+const createTodoList = list => `
   <div>Todo List</div>
   <div>
-      <ol>${list.map(createTodoItem)}</ol>
+      <ol>${list.map(createTodoItem).join('')}</ol>
   </div>
-`;
+`
+
+export default createTodoList

@@ -1,26 +1,33 @@
 import {parseHTML} from './helper'
 
-class TodoItem {
-  constructor (state) {
-    this._dom = null
-    this._state = state
-  }
-  get template () {
-    let list = ''
+export const createTodoItem = ({store}) => {
+  let dom = null
+  const template = () => {
+    const todo = store.get('todo')
+    const items = todo.reduce((result, {id, contents}) => {
+      return `${result}<li data-id="${id}">${contents}</li>`
+    }, '')
+    let list
 
-    if (this._state) {
-      const items = this._state.reduce((result, txt) => {
-        return `${result}<li>${txt}</li>`
-      }, '')
+    if (items) {
       list = `<ul>${items}</ul>`
+    } else {
+      list = 'No Items'
     }
-
     return `<div>${list}</div>`
   }
-  render () {
-    this._dom = parseHTML(this.template)
-    return this._dom
+  const mount = () => {
+    dom = parseHTML(template())
+    store.subscribe('todo', () => {
+      render()
+    })
+    return dom
   }
-}
+  const render = () => {
+    const newDom = parseHTML(template())
+    dom.replaceWith(newDom)
+    dom = newDom
+  }
 
-export default TodoItem
+  return mount()
+}

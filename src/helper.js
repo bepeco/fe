@@ -17,8 +17,10 @@ export const bindEvent = (events, methods, dom) => {
 }
 
 export const bindComponent = (components, dom) => {
-  for (const [selector, component] of components) {
-    dom.querySelector(selector).replaceWith(component)
+  for (const [selector, component, args] of components) {
+    getElem(selector, dom).forEach(elem => {
+      elem.replaceWith(component(args))
+    })
   }
 }
 

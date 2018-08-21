@@ -10,6 +10,9 @@ export const createTodoList = ({initState}) => {
           <input type="text" placeholder="enter task">
           <input type="submit" value="add">
       </form>
+      -------
+      <todo-item></todo-item>
+      -------
       <todo-item></todo-item>
     </div>`
   }
@@ -24,7 +27,9 @@ export const createTodoList = ({initState}) => {
     addItem (event) {
       event.preventDefault()
       const input = dom.querySelector('input[type="text"]')
-      const todo = store.get('todo')
+      const todo = store.get('todo').map(({contents}, index) => {
+        return { id: index, contents }
+      })
       todo.push({
         id: todo.length,
         contents: input.value
@@ -38,7 +43,7 @@ export const createTodoList = ({initState}) => {
   ]
   const components = () => {
     return [
-      ['todo-item', createTodoItem({store})]
+      ['todo-item', createTodoItem, {store}]
     ]
   }
 

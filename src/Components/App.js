@@ -1,13 +1,10 @@
-import { requestTodos } from '../Utils/Service'
 import createTodoList from './TodoList'
 
-const createApp = async () => {
-  const list = await requestTodos()
-
+const createApp = todoStore => {
   return `
   <div>
       <p>Todo App</p>
-      ${createTodoList(list)}
+      ${todoStore.bind(createTodoList)()}
   </div>`
 }
 

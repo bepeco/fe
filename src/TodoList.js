@@ -23,7 +23,6 @@ export const createTodoList = ({initState}) => {
   const methods = {
     addItem (event) {
       event.preventDefault()
-
       const input = dom.querySelector('input[type="text"]')
       const todo = store.get('todo')
       todo.push({

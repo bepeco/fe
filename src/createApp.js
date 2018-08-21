@@ -10,5 +10,5 @@ export default () => {
     ]
   }
   const todoList = createTodoList({initState})
-  getElem('#container').appendChild(todoList)
+  getElem('#container')[0].appendChild(todoList)
 }

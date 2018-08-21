@@ -1,11 +1,5 @@
-export const getElem = (selector) => {
-  const element = document.querySelectorAll(selector)
-
-  if (element.length > 1) {
-    return element
-  } else {
-    return element[0]
-  }
+export const getElem = (selector, parent = document) => {
+  return parent.querySelectorAll(selector)
 }
 
 export const parseHTML = (template) => {
@@ -16,7 +10,9 @@ export const parseHTML = (template) => {
 
 export const bindEvent = (events, methods, dom) => {
   for (const [selector, event, methodName] of events) {
-    dom.querySelector(selector)[event] = methods[methodName]
+    getElem(selector, dom).forEach(elem => {
+      elem[event] = methods[methodName]
+    })
   }
 }
 

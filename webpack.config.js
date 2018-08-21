@@ -6,7 +6,7 @@ const Webpack = require('webpack')
 const distPath = 'dist'
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: ['babel-polyfill', './src/index.js', './src/css/common.css'],
   output: {
     filename: 'bundle.js',
     chunkFilename: '[name].bundle.js',
@@ -40,6 +40,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: ['babel-loader']
+      },
+      {
+        test:/\.css$/,
+        use:['style-loader','css-loader']
       }
     ]
   },

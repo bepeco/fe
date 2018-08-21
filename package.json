@@ -30,6 +30,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "coveralls": "^3.0.2",
+    "css-loader": "^1.0.0",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
@@ -39,6 +40,7 @@
     "lint-staged": "^7.2.0",
     "standard": "^11.0.1",
     "standard-loader": "^6.0.1",
+    "style-loader": "^0.22.1",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"

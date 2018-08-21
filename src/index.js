@@ -1,132 +1,74 @@
-import { Freeze } from './ConstDecos'
+import './css/common.css'
 
-@Freeze
-class Constants {
-  name = 'mysticPrg'
-  age = 33
-}
+const datas = [
+  { id: 0, done: false, contents: 'asdasdad' },
+  { id: 1, done: false, contents: 'asdasdad' },
+  { id: 2, done: false, contents: 'asdasdad' }
+]
+
+let container
+let addBtn
+let itemList
 
 window.addEventListener('load', () => {
-  const data = new Constants()
+  container = document.querySelector('#container')
 
-  const str = `Hello ${data.name}! Your age: ${data.age}`
-  document.body.innerHTML = str
+  createTodoList(container)
 })
 
-/*
-[Memo]
+const createTodoList = (container) => {
+  const template = `<div className="todoListMain">
+        <div className="header">
+          <input id='addInput' placeholder="enter task">
+          </input>
+          <button id='addBtn'>add</button>
+        </div>
+        ${createTodoItems()}
+      </div>`
 
-https://github.com/standard/standard-loader
-https://standardjs.com/readme-kokr.html
-https://github.com/okonet/lint-staged
-https://jaeyeophan.github.io/2017/05/16/Everything-about-babel/ - babel polyfill 추가해야함
+  container.innerHTML = template
 
-CI - https://travis-ci.org/
-Coverage report - https://coveralls.io/
-Code quality - https://codeclimate.com/
-Documentation - https://inch-ci.org/
-JSDoc? - intellij auto comment: https://www.jetbrains.com/help/idea/creating-jsdoc-comments.html
-ESDoc? - difference with esdoc and jsdoc: https://esdoc.org/manual/faq.html#difference-between-esdoc-and-jsdoc
-index.d.ts? generate: https://www.npmjs.com/package/dts-gen
+  addBtn = document.getElementById('addBtn')
+  addBtn.addEventListener('click', (e) => {
+    addItem(e)
+  })
 
-Domain을 염두에 둔다면?
-jQuery와 인터페이스를 비슷하게 해도 괜찮을듯(익숙하니까)
+  itemList = document.getElementsByTagName('ul')[0]
+  itemList.addEventListener('click', (e) => {
+    deleteItem(e)
+  })
+}
 
-specification pattern 적용해볼 수도 있을 듯
-spec만 미리 만들어 놓고, Factory가 spec을 받아서 해당하는 노드를 만드는 등?
+const addItem = () => {
+  const addContents = document.getElementById('addInput')
+  if (addContents && addContents.value !== '') {
+    datas.push({id: (datas.length), done: false, contents: addContents.value})
+    createTodoList(container)
+    addContents.value = ''
+  }
+}
 
-Explainable?
+const createTodoItems = () => {
+  const template = `<ul className='theList'>
+          ${createTasks()}
+      </ul>`
 
-const btnSpec = Spec().on("click", onClick).className("button").style({ width: 200 });
-const btnDivs = [1, 2, 3].map(id => div().spec(btnSpec).data({ id }));
+  return template
+}
 
-설명이 앞에 오는 형태가 사람이 보기에 더 익숙하지 않을까?
+const createTasks = () => {
+  let template = ''
+  datas.forEach((v) => {
+    if (v.done === false) {
+      let task = `<li id=${v.id}>${v.contents}</li>`
+      template += task
+    }
+  })
 
-jsx)
-<div id="name" onClick={addTodo}}>
-  <p><input value={temp}></p>
-  <p>Hi</p> // 미리 spec을 만드려면 component를 별도로 작성해야 함
-</div>
+  return template
+}
 
-ex 1)
-div().id("name").on("click", addTodo).children(
-  p().children(
-    input().value(temp)
-  ),
-  p().spec(todoField).text("Hi")
-)
-
-ex 2)
-div(
-  p(
-    input().value(temp)
-  )
-  p("Hi").spec(todoField)
-).id("name").on("click", addTodo)
-
-ex 3)
-div(
-  id("name"),
-  on("click", addTodo),
-  p(
-    input(value(Temp))
-  ),
-  p(
-    spec(todField),
-    "Hi"
-  )
-)
-
-ex 4)
-div()
-  .attr(
-    id("name"),
-    on("click", addTodo),
-  ).children(
-    p().children(
-      input.attr(value(temp))
-    ),
-    p()
-      .spec(todField)
-      .children("Hi")
-  );
-
-ex 5)
-div(
-  id("name"),
-  on("click", addTodo),
-).children(
-  p().children(
-    input(value(temp))
-  ),
-  p(spec(todField)).children("Hi")
-);
-
-ex 6)
-const deleteSpec = spec({
-  onClick: deleteTodo,
-  class: "delete-btn"
-});
-
-div({
-  id: "name",
-  onClick: addTodo,
-  inner: [
-    p({ inner: input({ value: temp })),
-    p({ inner: "Hi" ),
-    input({
-      type: "button",
-      spec: deleteSpec
-    })
-  ]
-})
-
-예제는 역시 TodoList가 좋을듯
-const data = [
-  { id: 0, done: false, contents: "asdasdad" },
-  { id: 1, done: false, contents: "asdasdad" },
-  { id: 2, done: false, contents: "asdasdad" }
-];
-위 데이터를 가져왔다고 치고
-추가, 삭제, 수정(내용 및 done 여부) 가능해야 함.
- */
+const deleteItem = (e) => {
+  datas[e.target.id].done = true
+  createTodoList(container)
+}

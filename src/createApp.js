@@ -2,6 +2,7 @@ import {bindComponent, getElem, parseHTML} from './helper'
 import {createTodoList} from './TodoList'
 
 const createApp = () => {
+  // User
   const initState = {
     todo: [
       { id: 0, contents: 'asdasdad' },
@@ -17,6 +18,7 @@ const createApp = () => {
       ['todo-list', createTodoList, {initState}]
     ]
   }
+  // Framework
   const mount = () => {
     const dom = parseHTML(template())
     bindComponent(components(), dom)

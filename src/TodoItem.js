@@ -1,7 +1,6 @@
 import {parseHTML, bindEvent} from './helper'
 
 export const createTodoItem = ({store}) => {
-  let dom = null
   // User
   const template = () => {
     const todo = store.get('todo')
@@ -20,16 +19,6 @@ export const createTodoItem = ({store}) => {
     return `<div>${list}</div>`
   }
   const methods = {
-    render () {
-      const newDom = this.createNewDom()
-      dom.replaceWith(newDom)
-      dom = newDom
-    },
-    createNewDom () {
-      const dom = parseHTML(template())
-      bindEvent(events, methods, dom)
-      return dom
-    },
     removeItem () {
       const id = this.parentNode.getAttribute('data-id')
       const todo = store.get('todo')
@@ -39,9 +28,21 @@ export const createTodoItem = ({store}) => {
   }
   // Framework
   const mount = () => {
-    dom = methods.createNewDom()
+    let dom = null
+    const createNewDom = () => {
+      const dom = parseHTML(template())
+      bindEvent(events, methods, dom)
+      return dom
+    }
+    const render = () => {
+      const newDom = createNewDom()
+      dom.replaceWith(newDom)
+      dom = newDom
+    }
+
+    dom = createNewDom()
     store.subscribe('todo', () => {
-      methods.render()
+      render()
     })
     return dom
   }

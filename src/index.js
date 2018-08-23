@@ -1,6 +1,7 @@
 import { initSystem, invokeRender, registerRender } from './Utils/EventBinding'
 import createApp from './Components/App'
 import createTodoStore from './Stores/ToDoStore'
+import { App } from './Components/BaseComponent'
 
 initSystem()
 
@@ -14,3 +15,5 @@ window.addEventListener('load', async () => {
 
   invokeRender()
 })
+
+console.log(App)

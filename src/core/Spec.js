@@ -1,9 +1,9 @@
 import * as Descriptor from './Descriptor'
 import * as Exporter from './Exporter'
-import SpecWrapper from './SpecWrapper'
+import OperatorWrapper from './OperatorWrapper'
 
 export default (state = {}) => {
-  return SpecWrapper(state, {
+  return OperatorWrapper(state, {
     ...Descriptor,
     ...Exporter
   })

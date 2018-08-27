@@ -1,1 +1,1 @@
-export const toJSON = (state) => ({...state})
+export const toJSON = state => JSON.parse(JSON.stringify(state))

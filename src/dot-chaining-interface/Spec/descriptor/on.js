@@ -1,5 +1,4 @@
-import Spec from '../index'
+import {merge} from '../../helper/index'
 export const on = (state, eventName, listener) => {
-  state[eventName] = listener
-  return new Spec(state)
+  return merge(state, {[eventName]: listener})
 }

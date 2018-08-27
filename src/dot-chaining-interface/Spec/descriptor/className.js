@@ -1,5 +1,2 @@
-import Spec from '../index'
-export const className = (state, name) => {
-  state.className = name
-  return new Spec(state)
-}
+import {merge} from '../../helper/index'
+export const className = (state, className) => merge(state, {className})

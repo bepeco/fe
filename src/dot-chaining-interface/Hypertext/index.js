@@ -1,2 +1,3 @@
-export { div } from './html/div'
-export { p } from './html/p'
+export { div } from './div'
+export { p } from './p'
+export { text } from './text'

@@ -1,12 +1,16 @@
 import Spec from './Spec'
-import { div, p } from './Hypertext'
+import { div, p, text } from './Hypertext'
 
-console.log(
-  Spec()
-    .on('click', () => {})
-    .className('table table-border')
-    .toJSON()
-)
+const spec = Spec()
+  .on('click', () => {})
+  .className('table table-border')
+const child = [
+  div(),
+  p(),
+  text('Hello world')
+]
+const tag = div().spec(spec).children(...child)
+const data = tag.toJSON()
 
-div()
-p()
+console.log(tag)
+console.log(data)

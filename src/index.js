@@ -1,4 +1,5 @@
 import createApp from './createApp'
-import './core/example'
+import './dot-chaining-interface/example'
+import './pipe-interface/example'
 
 createApp()

@@ -1,7 +1,10 @@
-import { Descriptable, makeDescriptable } from '../Descriptor'
+import { Descriptable } from '../Descriptor'
+// import { Exportable, } from '../Exporter'
 
-class Spec extends Descriptable {}
+@Descriptable
+class Spec {
+}
 
-const SpecFactory = (...args) => makeDescriptable(new Spec(...args))
+const SpecFactory = () => new Spec()
 
 export default SpecFactory

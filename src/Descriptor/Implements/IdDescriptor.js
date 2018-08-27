@@ -1,13 +1,18 @@
-import { Descriptor, RegistrationDescriptor } from '../Descriptor'
+import { Descriptor } from '../Descriptor'
 
-@RegistrationDescriptor('id')
-class IdDescriptor extends Descriptor {
-  register (target, id) {
-    return this.setData({id})
+const dataMap = new WeakMap()
+const DEFAULT_OBJ = {id: undefined}
+
+@Descriptor('id')
+class IdDescriptor {
+  onInvoke (target, id) {
+    const data = dataMap.get(target) || DEFAULT_OBJ
+    data.id = id
+    dataMap.set(target, data)
   }
 
-  get (target) {
-    return this.getData(target)
+  getData (target) {
+    return dataMap.get(target) || DEFAULT_OBJ
   }
 }
 

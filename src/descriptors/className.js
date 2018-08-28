@@ -1,0 +1,3 @@
+const className = () => {}
+
+export { className }

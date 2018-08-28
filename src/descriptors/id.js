@@ -1,0 +1,3 @@
+const id = () => {}
+
+export { id }

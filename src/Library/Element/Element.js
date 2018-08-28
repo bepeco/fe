@@ -26,6 +26,10 @@ defines.forEach(define => {
   elementFactories[name] = (...args) => new Class(...args)
 })
 
-const {Div} = elementFactories
+const {
+  Div
+} = elementFactories
 
-export { Div }
+export {
+  Div
+}

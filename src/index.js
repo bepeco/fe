@@ -1,7 +1,5 @@
 import Spec from './Library/Spec/Spec'
-import { Div } from './Library/Element/Element'
 
-export {
-  Spec,
-  Div
-}
+export { Spec }
+
+export { Div } from './Library/Element/Element'

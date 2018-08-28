@@ -8,7 +8,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "watch": "webpack --watch",
-    "build": "standard && webpack",
+    "build": "standard && webpack --mode production",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "test": "jest",

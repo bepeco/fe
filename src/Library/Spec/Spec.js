@@ -1,8 +1,8 @@
 import { Descriptable } from '../Descriptor/index'
 import { Exportable } from '../Exporter/index'
 
-@Descriptable
-@Exportable
+@Descriptable()
+@Exportable()
 class Spec {
 }
 

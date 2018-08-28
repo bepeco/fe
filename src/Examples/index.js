@@ -1,3 +1,7 @@
-import { Spec } from '../index'
+import { Spec, Div } from '../index'
 
-console.log(Spec().id('name').toJSON())
+const spec = Spec().id('spec-id')
+const div = Div().id('div-id')
+
+console.log(spec, spec.toJSON())
+console.log(div, div.toJSON())

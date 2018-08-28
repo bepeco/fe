@@ -6,7 +6,7 @@ const Webpack = require('webpack')
 const distPath = 'dist'
 
 module.exports = {
-  entry: { // ['babel-polyfill', './src/index.js', './src/Examples/index.js'],
+  entry: {
     fe: ['babel-polyfill', './src/index.js'],
     example: ['./src/Examples/index.js']
   },

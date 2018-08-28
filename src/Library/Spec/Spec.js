@@ -2,7 +2,7 @@ import { Descriptable } from '../Descriptor/index'
 import { Exportable } from '../Exporter/index'
 
 @Descriptable()
-@Exportable()
+@Exportable('toJSON', 'toString')
 class Spec {
 }
 

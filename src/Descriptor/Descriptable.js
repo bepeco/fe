@@ -1,4 +1,4 @@
-import { getDescriptorNames, invokeDescriptor } from './Descriptor'
+import { getDescriptorNames, applyDescriptor } from './Descriptor'
 
 const Descriptable = targetClass => class extends targetClass {
   constructor (...args) {
@@ -14,9 +14,8 @@ const makeDescriptable = target => {
       throw new Error(`Target object already has property: ${name}`)
     }
 
-    // 중복체크는 등록할 때만
     target[name] = (...args) => {
-      invokeDescriptor(target, name, ...args)
+      applyDescriptor(target, name, ...args)
       return target
     }
   }

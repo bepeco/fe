@@ -1,24 +1,54 @@
 import RegistrationFactory from '../System/RegistrationFactory'
 
-const descriptorValidator = (name, TargetClass) => {
-  if (!TargetClass.prototype.hasOwnProperty('onInvoke')) {
-    throw new Error(`${name} descriptor should define "onInvoke" method.`)
+// WeakMap<targetInstance: Descriptable, map<descriptorName: String, data: any>>
+const descriptorDatabase = new WeakMap()
+
+const descriptorValidator = (descriptorName, TargetClass) => {
+  if (
+    !TargetClass.prototype.hasOwnProperty('onApply') &&
+    !TargetClass.hasOwnProperty('onApply')
+  ) {
+    throw new Error(`${descriptorName} Descriptor must have "onApply" method.`)
   }
 
-  if (!TargetClass.prototype.hasOwnProperty('getData')) {
-    throw new Error(`${name} descriptor should define "getData" method.`)
+  if (
+    !TargetClass.prototype.hasOwnProperty('getData') &&
+    !TargetClass.hasOwnProperty('getData')
+  ) {
+    throw new Error(`${descriptorName} Descriptor must have "getData" method.`)
   }
 }
 
-const {Decorator, getRegistrationNames, getRegistrationData} = RegistrationFactory('Descriptor', descriptorValidator)
+const {
+  Decorator: Descriptor,
+  getRegistrationNames: getDescriptorNames,
+  getInstance
+} = RegistrationFactory('Descriptor', descriptorValidator)
 
-const invokeDescriptor = (target, name, ...args) => getRegistrationData(name).onInvoke(target, ...args)
-const getData = name => getRegistrationData(name).getData()
+const applyDescriptor = (target, descriptorName, ...args) => {
+  // Map<descriptorName: String, data: any>
+  const map = descriptorDatabase.get(target) || new Map()
+  const descriptorData = map.get(descriptorName) || {}
+  const descriptor = getInstance(descriptorName)
 
-export {
-  Decorator as Descriptor,
-  getRegistrationNames as getDescriptorNames,
-
-  invokeDescriptor,
-  getData
+  descriptor.onApply(target, descriptorData, ...args)
+  map.set(descriptorName, descriptorData)
+  descriptorDatabase.set(target, map)
 }
+
+const getDescriptorData = target => {
+  const map = descriptorDatabase.get(target) || new Map()
+  const desctiptorData = []
+  for (const descriptorName of map.keys()) {
+    const descriptor = getInstance(descriptorName)
+    const data = map.get(descriptorName) || {}
+    desctiptorData.push({
+      name: descriptorName,
+      data: descriptor.getData(target, data)
+    })
+  }
+
+  return desctiptorData
+}
+
+export { Descriptor, getDescriptorNames, applyDescriptor, getDescriptorData }

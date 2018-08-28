@@ -1,21 +1,25 @@
 const RegistrationFactory = (category, validator) => {
+  // <name: String, target_instance: any>
+  // target_instance: ex) IdDescriptor, JSONExporter, etc...
   const registry = new Map()
 
   const Decorator = name => TargetClass => {
-    validator(name, TargetClass)
     checkDuplicatedName(category, registry, name)
-    registry.set(name, new TargetClass())
+    validator(name, TargetClass)
+
+    const targetInstance = new TargetClass()
+    registry.set(name, targetInstance)
 
     return TargetClass
   }
 
   const getRegistrationNames = () => Array.from(registry.keys())
-  const getRegistrationData = name => registry.get(name)
+  const getInstance = name => registry.get(name)
 
   return {
     Decorator,
     getRegistrationNames,
-    getRegistrationData
+    getInstance
   }
 }
 

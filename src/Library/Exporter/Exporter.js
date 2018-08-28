@@ -1,5 +1,5 @@
 import RegistrationFactory from '../System/RegistrationFactory'
-import { getDescriptorData } from '../Descriptor'
+import { getDescriptorData } from '../Descriptor/index'
 
 const exporterValidator = (name, TargetClass) => {
   if (!TargetClass.prototype.hasOwnProperty('onExport')) {

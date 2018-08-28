@@ -6,10 +6,13 @@ const Webpack = require('webpack')
 const distPath = 'dist'
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: { // ['babel-polyfill', './src/index.js', './src/Examples/index.js'],
+    fe: ['babel-polyfill', './src/index.js'],
+    example: ['./src/Examples/index.js']
+  },
   output: {
-    filename: 'bundle.js',
-    chunkFilename: '[name].bundle.js',
+    filename: '[name].js',
+    chunkFilename: '[name].chunk.js',
     path: path.resolve(__dirname, distPath)
   },
   devtool: 'inline-source-map',

@@ -1,3 +1,5 @@
-import Spec from './Spec/Spec'
+import Spec from './Library/Spec/Spec'
 
-console.log(Spec().id('name').toJSON())
+export {
+  Spec
+}

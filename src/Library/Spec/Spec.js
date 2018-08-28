@@ -1,5 +1,5 @@
-import { Descriptable } from '../Descriptor'
-import { Exportable } from '../Exporter'
+import { Descriptable } from '../Descriptor/index'
+import { Exportable } from '../Exporter/index'
 
 @Descriptable
 @Exportable

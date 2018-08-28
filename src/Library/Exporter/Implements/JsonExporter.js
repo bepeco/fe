@@ -1,5 +1,11 @@
 import { Exporter } from '../Exporter'
 
+const exportProc = {}
+
+exportProc.id = (data, result) => {
+  result.id = data.id
+}
+
 @Exporter('toJSON')
 class JsonExporter {
   onExport (target, descriptorData) {
@@ -10,17 +16,9 @@ class JsonExporter {
       }
     }
 
-    for (const {name, data} of descriptorData) {
-      switch (name) {
-        case 'id':
-          result.id = data.id
-          break
-      }
-    }
+    descriptorData.forEach(({name, data}) => exportProc[name](data, result))
 
-    return {
-      ...result
-    }
+    return result
   }
 }
 

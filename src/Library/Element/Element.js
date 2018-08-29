@@ -9,14 +9,24 @@ const defines = [
   }
 ]
 
+class BaseElement {
+  constructor (name = 'Element', tag = 'none') {
+    this.name = name
+    this.tag = tag
+  }
+}
+
 const exporters = ['toJSON', 'toDOM', 'toString']
 
 const createElementClass = define => {
-  const elementClass = class {
-    name = define.name
-    tag = define.tag
+  const elementClass = class extends BaseElement {
+    constructor () {
+      super(define.name, define.tag)
+    }
   }
-  return Exportable(...exporters)(Descriptable(...define.attributes)(elementClass))
+  return Exportable(...exporters)(
+    Descriptable(...define.attributes)(elementClass)
+  )
 }
 
 const elementFactories = {}
@@ -26,10 +36,6 @@ defines.forEach(define => {
   elementFactories[name] = (...args) => new Class(...args)
 })
 
-const {
-  Div
-} = elementFactories
+const {Div} = elementFactories
 
-export {
-  Div
-}
+export { BaseElement, Div }

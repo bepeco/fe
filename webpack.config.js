@@ -7,10 +7,8 @@ const distPath = 'dist'
 
 module.exports = {
   entry: {
-    fe: ['babel-polyfill', './src/index.js'],
-    example: ['./src/Examples/index.js']
-    // fe: ['./src/index.js'],
-    // example: ['./src/Examples/index.js']
+    fe: ['./src/index.js'],
+    example: ['babel-polyfill', './src/Examples/index.js']
   },
   output: {
     filename: '[name].js',

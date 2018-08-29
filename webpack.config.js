@@ -5,6 +5,8 @@ const Webpack = require('webpack')
 
 const distPath = 'dist'
 
+//TODO: library 내보내기용 webpack을 분리해야 할 듯
+
 module.exports = {
   entry: {
     fe: ['./src/index.js'],

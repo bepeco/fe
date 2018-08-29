@@ -4,6 +4,9 @@ import { div, p, text } from './Hypertext'
 const spec = Spec()
   .on('click', () => {})
   .className('table table-border')
+  .style({
+    width: '50px'
+  })
 const child = [
   div(),
   p(),

@@ -14,18 +14,18 @@ window.addEventListener('load', () => {
   const divSample = div().id('testDiv').data('id', 'test').className('testdiv').text('divSample')
     .style({
       width: '200px',
-      height: '150px'
+      height: '150px',
+      'background-color': 'blue'
     })
 
   const childrenSample = divSample.children(
-    p().text('chidrenSample!').style({width: '300px'})
+    p().text('chidrenSample!').style({width: '300px', 'background-color': 'yellow'})
   )
 
   const divSpec = new Spec().id('specTest')
-    .className('testdiv').style({width: '200px'}).text('specTest')
+    .className('testdiv').style({width: '200px', 'background-color': 'red'}).text('specTest')
   const specSample = div().spec(divSpec)
 
-  document.body.innerHTML = toString(divSample)
   document.body.innerHTML += toString(childrenSample)
   document.body.innerHTML += toString(specSample)
 

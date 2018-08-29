@@ -1,87 +1,55 @@
+import { id } from '../descriptors/id'
+import { data } from '../descriptors/data'
+import { className } from '../descriptors/className'
+import { style } from '../descriptors/style'
+import { on } from '../descriptors/on'
+import { children } from '../descriptors/children'
+import { text } from '../descriptors/text'
+import { spec } from '../descriptors/spec'
+
 class Spec {
   constructor (el) {
     this.element = el
     this.specMap = new Map()
   }
 
-  id (id) {
-    this.specMap.set('id', {id: id})
-    if (this.element) {
-      this.element.id = id
-    }
-    return this
+  id (name) {
+    this.specMap.set('id', {id: name})
+    return id(this, name)
   }
 
   data (name, value) {
     this.specMap.set('data', {name: name, value: value})
-    if (this.element) {
-      this.element.setAttribute('data-' + name, value)
-    }
-    return this
+    return data(this, name, value)
   }
 
   className (name) {
     this.specMap.set('className', {name: name})
-    if (this.element) {
-      this.element.classList.add(name)
-    }
-    return this
+    return className(this, name)
   }
 
-  style (style) {
-    this.specMap.set('style', {style: style})
-    if (this.element) {
-      for (let arg in style) {
-        this.element.style[arg] = style[arg]
-      }
-    }
-    return this
+  style (styles) {
+    this.specMap.set('style', {style: styles})
+    return style(this, styles)
   }
 
   on (name, listener) {
     this.specMap.set('on', {name: name, listener: listener})
-    if (this.element) {
-      const el = document.getElementById(this.element.id)
-      if (el) {
-        el.addEventListener(name, listener, false)
-      }
-    }
-    return this
+    return on(this, name, listener)
   }
 
   children (spec) {
     this.specMap.set('children', {spec: spec})
-    if (this.element) {
-      this.element.appendChild(spec.element)
-    }
-    return this
+    return children(this, spec)
   }
 
-  text (text) {
-    this.specMap.set('text', {text: text})
-    if (this.element) {
-      this.element.innerText = text
-    }
-    return this
+  text (str) {
+    this.specMap.set('text', {text: str})
+    return text(this, str)
   }
 
-  spec (spec) {
-    spec.specMap.forEach((val, key) => {
-      if (key === 'id') {
-        this.id(val.id)
-      } else if (key === 'data') {
-        this.data(val.name, val.data)
-      } else if (key === 'className') {
-        this.className(val.name)
-      } else if (key === 'style') {
-        this.style(val.style)
-      } else if (key === 'on') {
-        this.on(val.name, val.listener)
-      } else if (key === 'text') {
-        this.text(val.text)
-      }
-    })
-    return this
+  spec (specObj) {
+    return spec(this, specObj)
   }
 }
 

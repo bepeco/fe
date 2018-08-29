@@ -41,9 +41,10 @@ class Spec {
   on (name, listener) {
     this.specMap.set('on', {name: name, listener: listener})
     if (this.element) {
-      this.element.addEventListener(name, function (e) {
-        listener(e)
-      })
+      const el = document.getElementById(this.element.id)
+      if (el) {
+        el.addEventListener(name, listener, false)
+      }
     }
     return this
   }

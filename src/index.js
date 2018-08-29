@@ -11,7 +11,7 @@ const onClick = (e) => {
 }
 
 window.addEventListener('load', () => {
-  let divSample = div().id('testDiv').data('id', 'test').on('click', onClick).className('testdiv').text('divSample')
+  const divSample = div().id('testDiv').data('id', 'test').className('testdiv').text('divSample')
     .style({
       width: '200px',
       height: '150px'
@@ -21,12 +21,17 @@ window.addEventListener('load', () => {
     p().text('chidrenSample!').style({width: '300px'})
   )
 
-  const divSpec = new Spec().id('specTest').on('click', onClick).className('testdiv').style({width: '200px'}).text('specTest')
+  const divSpec = new Spec().id('specTest')
+    .className('testdiv').style({width: '200px'}).text('specTest')
   const specSample = div().spec(divSpec)
 
   document.body.innerHTML = toString(divSample)
   document.body.innerHTML += toString(childrenSample)
   document.body.innerHTML += toString(specSample)
+
+  divSample.on('click', onClick)
+  childrenSample.on('click', onClick)
+  specSample.on('click', onClick)
 
   console.log('toDOM = ', toDOM(divSample))
 })

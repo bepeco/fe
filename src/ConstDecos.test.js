@@ -1,4 +1,4 @@
-import { Freeze, Readonly } from '../src/ConstDecos'
+import { Freeze, Readonly } from './ConstDecos'
 
 /** @test {Readonly} */
 describe('Readonly를 적용한 property는', () => {
